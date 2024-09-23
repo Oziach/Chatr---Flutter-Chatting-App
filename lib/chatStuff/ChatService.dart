@@ -9,6 +9,39 @@ class ChatService {
   final FirebaseFirestore fireStore = FirebaseFirestore.instance;
 
   //get user stream
+  Stream<List<Map<String, dynamic>>> GetChattersStream() {
+
+    var currentUser = Auth().GetCurrentUser();
+    return fireStore
+    .collection("Users")
+    .doc(currentUser!.uid)
+    .collection("chatters")
+    .snapshots()
+    .asyncMap((snapshot) async {
+      final chattersEmailsList = snapshot.docs.map((doc) => doc.id).toList();
+      final allUsersSnapshot = await fireStore.collection("Users").get();
+
+      return allUsersSnapshot.docs
+        .where((doc) =>
+          chattersEmailsList.contains(doc.data()["email"])
+        )
+        .map((doc)=>doc.data())
+        .toList();
+
+    });
+  }
+
+  void AddToChatters(String email){
+    var userId = Auth().GetCurrentUser()!.uid;
+    fireStore
+    .collection("Users")
+    .doc(userId)
+    .collection("chatters")
+    .doc(email)
+    .set({});
+  }
+  
+    //get user stream
   Stream<List<Map<String,dynamic>>> GetUsersStream(){
     return fireStore.collection("Users").snapshots().map((snapshot){
       return snapshot.docs.map((doc){
@@ -66,7 +99,7 @@ class ChatService {
   }
 
   void DeleteMessage(senderId, receiverId, messageId){
-    
+
     String chatroomId = GetChatroomId(senderId, receiverId);
 
     fireStore

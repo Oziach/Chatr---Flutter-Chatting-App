@@ -45,7 +45,7 @@ class LoginPage extends StatelessWidget {
           SizedBox(height: 30,),
 
           //flashy text
-          Text('Welcome back!', style: TextStyle(color: Theme.of(context).colorScheme.tertiary, fontSize: 22),),
+          Text('Welcome back!', style: TextStyle(color: Theme.of(context).colorScheme.inversePrimary, fontSize: 22),),
 
           SizedBox(height: 25,),
 

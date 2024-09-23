@@ -1,5 +1,6 @@
 import 'package:chatr/authStuff/auth.dart';
 import 'package:chatr/chatStuff/ChatService.dart';
+import 'package:chatr/components/addChatterPopup.dart';
 import 'package:chatr/components/customDrawer.dart';
 import 'package:chatr/components/userTile.dart';
 import 'package:chatr/pages/chatPage.dart';
@@ -26,13 +27,33 @@ class HomePage extends StatelessWidget {
       ),
       drawer: CustomDrawer(),
       body: BuildUserList(),
+
+      floatingActionButton: SizedBox(
+
+        width: 75,
+        child: FloatingActionButton(
+          
+          onPressed: () => ShowAddFriendPopup(context),
+          child: Container(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+              Icon(Icons.people),
+              Icon(Icons.add),
+              ]
+            
+            ),
+          ),
+        ),
+      ),
     );
   }
 
   //build user list
   Widget BuildUserList(){
+
     return StreamBuilder(
-      stream: chatService.GetUsersStream(), 
+      stream: chatService.GetChattersStream(), 
       builder: (context, snapshot){
         //error 
         if(snapshot.hasError){
@@ -46,9 +67,17 @@ class HomePage extends StatelessWidget {
         
         //return list view
         return ListView(
+          
           children: snapshot.data!.map<Widget>((userData) => BuildUserListItem(userData, context)).toList(),
         );
       }
+    );
+  }
+
+  void ShowAddFriendPopup(BuildContext context){
+    showDialog(
+      context: context, 
+      builder: (conetxt) => AddChatterPopup()
     );
   }
 

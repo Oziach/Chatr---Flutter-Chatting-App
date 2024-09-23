@@ -58,7 +58,7 @@ class RegisterPage extends StatelessWidget {
           SizedBox(height: 30,),
 
           //flashy text
-          Text('Create your account', style: TextStyle(color: Theme.of(context).colorScheme.tertiary, fontSize: 22),),
+          Text('Create your account', style: TextStyle(color: Theme.of(context).colorScheme.inversePrimary, fontSize: 22),),
 
           SizedBox(height: 25,),
 
