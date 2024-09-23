@@ -6,24 +6,96 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-class ChatPage extends StatelessWidget {
+class ChatPage extends StatefulWidget {
 
   final String receiverEmail;
   final String receiverId;
 
   ChatPage({super.key, required this.receiverEmail, required this.receiverId});
 
+
+  @override
+  State<ChatPage> createState() => _ChatPageState();
+}
+
+class _ChatPageState extends State<ChatPage> {
   final TextEditingController messageController = TextEditingController();
 
   final ChatService chatService = ChatService();
+
   final Auth auth = Auth();
+
+  FocusNode focusNode = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+
+    //add listener
+    focusNode.addListener((){
+      if(focusNode.hasFocus){
+        Future.delayed(
+          const Duration(milliseconds: 500),
+          ScrollDown,
+        );
+      }
+    });
+  }
+  
+
+  final ScrollController scrollController = ScrollController(); 
+
+  void ScrollDown(){
+    scrollController.animateTo(
+      scrollController.position.maxScrollExtent, 
+      duration: const Duration(milliseconds: 500), 
+      curve: Curves.fastOutSlowIn,
+    );
+  }
+
+  @override
+  void dispose() {
+    focusNode.dispose();
+    messageController.dispose();
+    super.dispose();
+  }
+
+  //show options
+  void ShowOptions(BuildContext context, String messageId){
+    showModalBottomSheet(
+      context: context,
+       builder: (context){
+        return SafeArea(
+          child: Wrap(
+            children: [
+          
+              //delete message
+              ListTile(
+                leading: Icon(Icons.delete, color: Colors.red[600],),
+                title: Text('Delete', style: TextStyle(color: Colors.red[600]),),
+              ),
+
+              //cancel button
+               ListTile(
+                leading: Icon(Icons.cancel, color: Theme.of(context).colorScheme.inversePrimary,),
+                title: Text('Cancel', style: TextStyle(color: Theme.of(context).colorScheme.inversePrimary,)),
+              ),
+              
+            ],
+          )
+        );
+      }
+    );
+  }
 
   //send message
   void SendMessage() async {
     if(messageController.text.isNotEmpty){
-      await chatService.SendMessage(receiverId, messageController.text);
+      await chatService.SendMessage(widget.receiverId, messageController.text);
       messageController.clear();
     }
+
+    ScrollDown();
   }
 
   @override
@@ -31,7 +103,7 @@ class ChatPage extends StatelessWidget {
     return Scaffold(
        appBar: AppBar(
         centerTitle: true,
-        title: Text(receiverEmail, style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20),),
+        title: Text(widget.receiverEmail, style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20),),
         backgroundColor: Colors.transparent,
         elevation: 0,
         foregroundColor: Colors.blueGrey[400],
@@ -55,7 +127,7 @@ class ChatPage extends StatelessWidget {
   Widget BuildMessagesList(){
     String senderId = auth.GetCurrentUser()!.uid;
     return StreamBuilder(
-      stream: chatService.GetAllMessages(senderId, receiverId), 
+      stream: chatService.GetAllMessages(senderId, widget.receiverId), 
       builder: (context, snapshot){
         //errors
         if(snapshot.hasError){
@@ -69,8 +141,10 @@ class ChatPage extends StatelessWidget {
 
         //return all messages list
         return ListView(
+          controller: scrollController,
           children: snapshot.data!.docs.map((doc) => CreateMessageItem(doc)).toList(),
         );
+        
       }
     );
   }
@@ -84,7 +158,7 @@ class ChatPage extends StatelessWidget {
 
     return Container(
       alignment: alignmnet,
-      child: ChatBubble(message: data["messageText"], isCurrentUser: isCurrentUser),
+      child: ChatBubble(message: data["messageText"], isCurrentUser: isCurrentUser, messageId: doc.id, onLongPress: ShowOptions,),
     );
   }
 
@@ -97,7 +171,8 @@ class ChatPage extends StatelessWidget {
           Expanded(child: CustomTextField(
             hintText: "Type a message", 
             hideText: false, 
-            controller: messageController
+            controller: messageController,
+            focusNode: focusNode,
           )),
       
           Container(
@@ -106,6 +181,7 @@ class ChatPage extends StatelessWidget {
               onPressed: SendMessage, 
               icon: Icon(
                 Icons.send,
+                color: Theme.of(context).colorScheme.inversePrimary,
               ),
             ),
           ),

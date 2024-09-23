@@ -1,4 +1,4 @@
-import 'package:chatr/themes/DarkMode%20copy.dart';
+import 'package:chatr/themes/DarkMode.dart';
 import 'package:chatr/themes/lightMode.dart';
 import 'package:flutter/material.dart';
 
@@ -6,7 +6,7 @@ class ThemeProvider extends ChangeNotifier {
 
   ThemeData currThemeData = lightMode;
 
-  ThemeData get themeData =>currThemeData;
+  ThemeData get themeData => currThemeData;
 
   bool get isDarkMode => currThemeData == darkMode;
 
@@ -17,10 +17,10 @@ class ThemeProvider extends ChangeNotifier {
 
   void ToggleTheme(){
     if(currThemeData == lightMode){
-      currThemeData = darkMode;
+      themeData = darkMode;
     }
     else{
-      currThemeData = lightMode;
+      themeData = lightMode;
     }
   }
 }

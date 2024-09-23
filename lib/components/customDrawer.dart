@@ -36,7 +36,7 @@ class CustomDrawer extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 20, top: 12),
                 child: ListTile(
-                  leading: Icon(Icons.people),
+                  leading: Icon(Icons.people, color: Theme.of(context).colorScheme.inversePrimary,),
                   title: Text('C H A T S', style: TextStyle(fontSize: 22, color: Theme.of(context).colorScheme.inversePrimary, fontWeight: FontWeight.bold),),
                   onTap: (){}, 
                 ),
@@ -46,7 +46,7 @@ class CustomDrawer extends StatelessWidget {
                   Padding(
                 padding: const EdgeInsets.only(left:20, top: 12),
                 child: ListTile(
-                  leading: Icon(Icons.settings),
+                  leading: Icon(Icons.settings, color: Theme.of(context).colorScheme.inversePrimary,),
                   title: Text('S E T T I N G S', style: TextStyle(fontSize: 22, color: Theme.of(context).colorScheme.inversePrimary, fontWeight: FontWeight.bold),),
                   onTap: (){
                     Navigator.pop(context);
@@ -68,7 +68,7 @@ class CustomDrawer extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 20, top: 12, bottom: 20),
             child: ListTile(
-              leading: Icon(Icons.logout),
+              leading: Icon(Icons.logout, color: Theme.of(context).colorScheme.inversePrimary,),
               title: Text('L O G O U T', style: TextStyle(fontSize: 22, color: Theme.of(context).colorScheme.inversePrimary, fontWeight: FontWeight.bold),),
               onTap: Logout, 
             ),

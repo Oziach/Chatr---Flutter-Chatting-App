@@ -12,7 +12,7 @@ class UserTile extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        margin: EdgeInsets.all(10),
+        margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
         padding: EdgeInsets.symmetric(horizontal: 17, vertical: 25),
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.secondary,
@@ -21,13 +21,17 @@ class UserTile extends StatelessWidget {
         child: Row(children: [
           
           //icon
-          Icon(Icons.person),
+          Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: Icon(Icons.person, color: Theme.of(context).colorScheme.inversePrimary,),
+          ),
 
           //username
           Text(
             text,
             style: TextStyle(
-              fontSize: 20
+              fontSize: 20,
+              color: Theme.of(context).colorScheme.inversePrimary
             ),
           ),
         ],),

@@ -7,8 +7,9 @@ class CustomTextField extends StatelessWidget {
   String hintText;
   bool hideText = false;
   TextEditingController controller;
+  final FocusNode? focusNode;
 
-  CustomTextField({super.key, required this.hintText, required this.hideText, required this.controller});
+  CustomTextField({super.key, required this.hintText, required this.hideText, required this.controller, this.focusNode});
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +18,8 @@ class CustomTextField extends StatelessWidget {
       child: TextField(
         obscureText: hideText,
         controller: controller,
+        focusNode: focusNode,
+        style: TextStyle(color: Theme.of(context).colorScheme.inversePrimary),
         decoration: InputDecoration(
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(color: Theme.of(context).colorScheme.secondary),
@@ -31,8 +34,6 @@ class CustomTextField extends StatelessWidget {
 
           hintText: hintText,
           hintStyle: TextStyle(color: Theme.of(context).colorScheme.tertiary),
-
-          
         ),
       ),
     );

@@ -3,7 +3,7 @@
 import 'package:chatr/authStuff/authGate.dart';
 import 'package:chatr/authStuff/loginRegister.dart';
 import 'package:chatr/firebase_options.dart';
-import 'package:chatr/themes/DarkMode%20copy.dart';
+import 'package:chatr/themes/DarkMode.dart';
 import 'package:chatr/themes/lightMode.dart';
 import 'package:chatr/themes/themeProvider.dart';
 import 'package:firebase_core/firebase_core.dart';
