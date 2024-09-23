@@ -57,19 +57,54 @@ class HomePage extends StatelessWidget {
       builder: (context, snapshot){
         //error 
         if(snapshot.hasError){
-          return const Text("Error");
+          return Text(
+                  "Error",
+                  style: TextStyle(
+                    color: Colors.red[600],
+                    fontSize: 20
+                  ),
+                  textAlign: TextAlign.center,
+                );
         }
 
         //loading
         if(snapshot.connectionState == ConnectionState.waiting){
-          return const Text("Loading...");
+          return Text(
+                  "Loading",
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.tertiary,
+                    fontSize: 20
+                  ),
+                  textAlign: TextAlign.center,
+                );
         }
         
         //return list view
-        return ListView(
-          
-          children: snapshot.data!.map<Widget>((userData) => BuildUserListItem(userData, context)).toList(),
-        );
+        List<Widget> friendsList = snapshot.data!.map<Widget>((userData) => BuildUserListItem(userData, context)).toList();
+        
+        if(friendsList.isNotEmpty){
+          return ListView(
+            children: friendsList,
+          );
+        }
+        else{
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Center(
+                child: Text(
+                  "You haven't started any conversations yet",
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.tertiary,
+                    fontSize: 24
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              )
+            ],
+          );
+        }
+    
       }
     );
   }

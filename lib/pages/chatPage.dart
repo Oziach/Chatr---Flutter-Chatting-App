@@ -203,7 +203,7 @@ class _ChatPageState extends State<ChatPage> {
 
   Widget UserInput(BuildContext context){
     return Padding(
-      padding: const EdgeInsets.only(bottom: 25, ),
+      padding: const EdgeInsets.only(bottom: 25, top: 10, right: 20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -215,7 +215,6 @@ class _ChatPageState extends State<ChatPage> {
           )),
       
           Container(
-
             child: IconButton(
               onPressed: SendMessage, 
               icon: Icon(
