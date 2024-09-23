@@ -65,6 +65,18 @@ class ChatService {
     .snapshots();    
   }
 
+  void DeleteMessage(senderId, receiverId, messageId){
+    
+    String chatroomId = GetChatroomId(senderId, receiverId);
+
+    fireStore
+    .collection("chatrooms")
+    .doc(chatroomId)
+    .collection("messages")
+    .doc(messageId)
+    .delete();
+  }
+
   String GetChatroomId(senderId, receiverId){
     List<String> ids = [senderId, receiverId];
     ids.sort();
@@ -72,4 +84,5 @@ class ChatService {
 
     return chatroomId;
   }
+
 } 

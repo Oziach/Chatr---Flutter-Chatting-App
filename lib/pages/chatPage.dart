@@ -73,12 +73,20 @@ class _ChatPageState extends State<ChatPage> {
               ListTile(
                 leading: Icon(Icons.delete, color: Colors.red[600],),
                 title: Text('Delete', style: TextStyle(color: Colors.red[600]),),
+                onTap: () {
+                  Navigator.pop(context);
+                  ShowDeleteConfirmation(context , messageId);
+                },
+
               ),
 
               //cancel button
                ListTile(
                 leading: Icon(Icons.cancel, color: Theme.of(context).colorScheme.inversePrimary,),
                 title: Text('Cancel', style: TextStyle(color: Theme.of(context).colorScheme.inversePrimary,)),
+                onTap: () => {
+                  Navigator.pop(context)
+                },
               ),
               
             ],
@@ -86,6 +94,37 @@ class _ChatPageState extends State<ChatPage> {
         );
       }
     );
+  }
+
+  void ShowDeleteConfirmation(BuildContext context, String messageId){
+    showDialog(
+      context: context,
+       builder: (context) => AlertDialog(
+        title: Text("Delete message", style: TextStyle(color: Theme.of(context).colorScheme.inversePrimary),),
+        content: Text("Are you sure you want to delete this message", style: TextStyle(color: Theme.of(context).colorScheme.inversePrimary),),
+        actions: [
+          
+          
+          //cancel button
+          TextButton(
+            onPressed: () => Navigator.pop(context), 
+            child: Text("Cancel", style: TextStyle(color: Theme.of(context).colorScheme.tertiary),)
+          ),
+
+          //delete button
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+
+              chatService.DeleteMessage(auth.GetCurrentUser()!.uid, widget.receiverId, messageId);
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Message deleted!"), duration: Duration(milliseconds: 1000),));
+            } ,
+            child: Text("Delete", style: TextStyle(color: Colors.red[600],)),
+          ),
+
+        ],
+       )
+      );
   }
 
   //send message
