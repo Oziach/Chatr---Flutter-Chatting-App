@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "704050182009",
+    "project_id": "chatr-792f3",
+    "storage_bucket": "chatr-792f3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:704050182009:android:f9de36a56cb1dffca821a8",
+        "android_client_info": {
+          "package_name": "com.example.chatr"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAf-RF7ccG_-aSonMjz-TE5D586VAkrGQY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
