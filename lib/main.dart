@@ -3,15 +3,23 @@
 import 'package:chatr/authStuff/authGate.dart';
 import 'package:chatr/authStuff/loginRegister.dart';
 import 'package:chatr/firebase_options.dart';
+import 'package:chatr/themes/DarkMode%20copy.dart';
 import 'package:chatr/themes/lightMode.dart';
+import 'package:chatr/themes/themeProvider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() async 
 {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  runApp(const MyApp());
+
+
+  runApp(ChangeNotifierProvider(
+    create: (context) => ThemeProvider(),
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -23,7 +31,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: AuthGate(),
-      theme: lightMode,
+      theme: Provider.of<ThemeProvider>(context).themeData,
     );
   }
 }

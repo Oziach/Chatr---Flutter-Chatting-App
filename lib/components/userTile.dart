@@ -24,7 +24,12 @@ class UserTile extends StatelessWidget {
           Icon(Icons.person),
 
           //username
-          Text(text),
+          Text(
+            text,
+            style: TextStyle(
+              fontSize: 20
+            ),
+          ),
         ],),
       ),
     );

@@ -18,7 +18,11 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Home"),
+        centerTitle: true,
+        title: Text("Home", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 24),),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        foregroundColor:Theme.of(context).colorScheme.inversePrimary,
       ),
       drawer: CustomDrawer(),
       body: BuildUserList(),

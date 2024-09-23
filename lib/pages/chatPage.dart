@@ -1,5 +1,6 @@
 import 'package:chatr/authStuff/auth.dart';
 import 'package:chatr/chatStuff/ChatService.dart';
+import 'package:chatr/components/chatBubble.dart';
 import 'package:chatr/components/customTextField.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -28,9 +29,16 @@ class ChatPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(receiverEmail),),
+       appBar: AppBar(
+        centerTitle: true,
+        title: Text(receiverEmail, style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20),),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        foregroundColor: Colors.blueGrey[400],
+      ),
       body: Column(
         children: [
+
           //all messages
           Expanded(
             child: BuildMessagesList(),
@@ -76,7 +84,7 @@ class ChatPage extends StatelessWidget {
 
     return Container(
       alignment: alignmnet,
-      child: Text(data["messageText"])
+      child: ChatBubble(message: data["messageText"], isCurrentUser: isCurrentUser),
     );
   }
 
