@@ -1,17 +1,48 @@
-# chatr
+# Chatr
 
-A new Flutter project.
+Chatting app for Android and iOS. Built using Flutter and Firebase.
 
-## Getting Started
+## Screenshots
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+---Chat---
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+<img src="https://github.com/Oziach/Chatr---Flutter-Chatting-App/blob/main/screenshots/chatroom.png" width=200em>
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-# Chatr---Flutter-Chatting-App
+<br>
+
+---Login---
+
+<img src="https://github.com/Oziach/Chatr---Flutter-Chatting-App/blob/main/screenshots/login.png" width=200em>
+
+
+<br>
+
+---Register---
+
+<img src="https://github.com/Oziach/Chatr---Flutter-Chatting-App/blob/main/screenshots/register.png" width=200em>
+
+
+<br>
+
+---Home---
+
+<img src="https://github.com/Oziach/Chatr---Flutter-Chatting-App/blob/main/screenshots/home.png" width=200em>
+
+<br>
+
+---Dark Mode---
+
+<img src="https://github.com/Oziach/Chatr---Flutter-Chatting-App/blob/main/screenshots/darkMode.png" width=200em>
+
+<br>
+
+---Messaging---
+
+<img src="https://github.com/Oziach/Chatr---Flutter-Chatting-App/blob/main/screenshots/messaging.png" width=200em>
+
+<br>
+
+---Drawer---
+
+<img src="https://github.com/Oziach/Chatr---Flutter-Chatting-App/blob/main/screenshots/drawer.png" width=200em>
