@@ -1,6 +1,6 @@
 # Chatr
 
-Chatting app for Android and iOS. Built using Flutter and Firebase.
+Chatting app for Android and iOS - Built using <b>Flutter</b> and <b>Firebase</b>.
 
 ## Screenshots
 
