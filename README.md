@@ -1,6 +1,6 @@
-# Chatr
+# Chattr
 
-Chatting app for Android and iOS - Built using <b>Flutter</b> and <b>Firebase</b>.
+Chattr is a chatting app for Android and iOS - Built using <b>Flutter</b> and <b>Firebase</b>.
 
 ## Screenshots
 
